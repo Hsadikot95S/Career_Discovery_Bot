@@ -1,0 +1,26 @@
+[
+  {
+    "title": "Software Engineer",
+    "description": "Works on building software systems, requires strong analytical and problem-solving skills.",
+    "skills": ["coding", "algorithms", "problem solving"],
+    "domain": "Engineering"
+  },
+  {
+    "title": "UX Designer",
+    "description": "Designs user experiences, requires creativity and empathy.",
+    "skills": ["design", "creativity", "user research"],
+    "domain": "Design"
+  },
+  {
+    "title": "Business Analyst",
+    "description": "Analyzes business processes and markets.",
+    "skills": ["analysis", "business strategy"],
+    "domain": "Business"
+  },
+  {
+    "title": "Research Scientist",
+    "description": "Conducts research and experiments.",
+    "skills": ["research", "analysis"],
+    "domain": "Research"
+  }
+]
