@@ -31,6 +31,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+ASGI_APPLICATION = "core.asgi.application"
+
 
 # Application definition
 
@@ -48,6 +50,7 @@ INSTALLED_APPS = [
     'features.apps.FeaturesConfig',
     'matching.apps.MatchingConfig',
     'recommendations.apps.RecommendationsConfig',
+    'channels',
 ]
 
 MIDDLEWARE = [
