@@ -29,7 +29,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
         msg_type = data.get("type", "text")
 
-        # 🔹 1) Resolve user input (text OR audio)
+        # 1) Resolve user input (text OR audio)
         if msg_type == "text":
             user_input = data.get("message", "").strip()
             if not user_input:
@@ -48,7 +48,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
                 await self.send(json.dumps({"error": "Invalid base64 audio"}))
                 return
 
-            # 🔥 Transcribe
+            # Transcribe
             user_input = await sync_to_async(transcribe_bytes)(audio_bytes)
 
             await self.send(json.dumps({
@@ -64,20 +64,20 @@ class ChatConsumer(AsyncWebsocketConsumer):
             await self.send(json.dumps({"error": "Unknown message type"}))
             return
 
-        # 🔹 2) Fetch session
+        # 2) Fetch session
         try:
             session = await sync_to_async(Session.objects.get)(id=self.session_id)
         except Session.DoesNotExist:
             await self.send(json.dumps({"error": "Invalid session"}))
             return
 
-        # 🔹 3) Build profile + hybrid
+        # 3) Build profile + hybrid
         user_profile = await sync_to_async(build_user_profile)(session)
         hybrid = await sync_to_async(hybrid_recommendation)(session)
 
-        # 🔥 4) STREAM LLM (FIXED)
+        # 4) STREAM LLM (FIXED)
         try:
-            # ✅ Correct way (NO lambda misuse, NO double call)
+            # Correct way (NO lambda misuse, NO double call)
             def generate_tokens():
                 return list(stream_explanation(user_profile, hybrid["recommendations"]))
 

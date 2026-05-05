@@ -1,26 +1,51 @@
 [
   {
     "title": "Software Engineer",
-    "description": "Works on building software systems, requires strong analytical and problem-solving skills.",
+    "domain": "Engineering",
     "skills": ["coding", "algorithms", "problem solving"],
-    "domain": "Engineering"
+    "signals": ["math", "coding", "logic"]
   },
   {
     "title": "UX Designer",
-    "description": "Designs user experiences, requires creativity and empathy.",
+    "domain": "Design",
     "skills": ["design", "creativity", "user research"],
-    "domain": "Design"
+    "signals": ["creativity", "visual", "empathy"]
   },
   {
     "title": "Business Analyst",
-    "description": "Analyzes business processes and markets.",
+    "domain": "Business",
     "skills": ["analysis", "business strategy"],
-    "domain": "Business"
+    "signals": ["business", "analysis", "communication"]
   },
   {
     "title": "Research Scientist",
-    "description": "Conducts research and experiments.",
+    "domain": "Research",
     "skills": ["research", "analysis"],
-    "domain": "Research"
+    "signals": ["experiments", "science", "analysis"]
+  },
+
+  {
+    "title": "Content Writer",
+    "domain": "Language",
+    "skills": ["writing", "grammar", "storytelling"],
+    "signals": ["english", "hindi", "writing", "language"]
+  },
+  {
+    "title": "Journalist",
+    "domain": "Language",
+    "skills": ["reporting", "writing", "communication"],
+    "signals": ["news", "writing", "communication"]
+  },
+  {
+    "title": "Translator",
+    "domain": "Language",
+    "skills": ["translation", "bilingual", "grammar"],
+    "signals": ["hindi", "english", "language"]
+  },
+  {
+    "title": "Poet / Author",
+    "domain": "Language",
+    "skills": ["creative writing", "literature"],
+    "signals": ["poetry", "writing", "literature"]
   }
 ]

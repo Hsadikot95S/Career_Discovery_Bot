@@ -26,7 +26,7 @@ def load_career_data():
 
     db.persist()
 
-    print("✅ Career data loaded into vector DB")
+    print("Career data loaded into vector DB")
 
 
 if __name__ == "__main__":

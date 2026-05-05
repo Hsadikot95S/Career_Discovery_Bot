@@ -1,8 +1,8 @@
 from django.urls import path
-from .views import get_recommendation, final_recommendation,hybrid_result
+from .views import basic_recommendation, scored_recommendation, final_recommendation
 
 urlpatterns = [
-    path("result/<uuid:session_id>/", get_recommendation),
-    path("final/<uuid:session_id>/", final_recommendation),
-    path("hybrid/<uuid:session_id>/", hybrid_result),
+    path("recommendations/basic/<uuid:session_id>/", basic_recommendation),
+    path("recommendations/scored/<uuid:session_id>/", scored_recommendation),
+    path("recommendations/final/<uuid:session_id>/", final_recommendation),
 ]

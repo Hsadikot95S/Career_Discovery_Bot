@@ -25,4 +25,4 @@ def seed_questions():
             }
         )
 
-    print("✅ Questions seeded successfully")
+    print("Questions seeded successfully")

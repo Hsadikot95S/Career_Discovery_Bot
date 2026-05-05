@@ -8,11 +8,11 @@ load_dotenv()
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 def safe_json_parse(data):
-    # ✅ Case 1: Already parsed (best case)
+    # Case 1: Already parsed (best case)
     if isinstance(data, dict):
         return data
 
-    # ✅ Case 2: String → parse
+    # Case 2: String → parse
     if isinstance(data, str):
         try:
             return json.loads(data)
@@ -63,7 +63,7 @@ Rules:
 
     response = client.chat.completions.create(
         model="gpt-4o-mini",
-        temperature=0.3,  # 🔥 Lower = more deterministic
+        temperature=0.3,  
         messages=[
             {"role": "system", "content": "You output strict JSON only."},
             {"role": "user", "content": prompt}
@@ -94,7 +94,7 @@ Respond with explanation, skills, and roadmap.
             {"role": "system", "content": "You are a helpful assistant"},
             {"role": "user", "content": prompt}
         ],
-        stream=True  # 🔥 KEY
+        stream=True  
     )
 
     for chunk in stream:

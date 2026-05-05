@@ -1,7 +1,7 @@
 from features.models import FeatureVector
 
 
-# 🔹 STEP 1 — Aggregate all feature vectors
+# STEP 1 — Aggregate all feature vectors
 def aggregate_features(session):
     vectors = FeatureVector.objects.filter(session=session)
 
@@ -26,7 +26,7 @@ def aggregate_features(session):
     return aggregate
 
 
-# 🔹 STEP 2 — Normalize features (important for stability)
+# STEP 2 — Normalize features (important for stability)
 def normalize_features(features):
     total = sum(features.values())
 
@@ -36,35 +36,39 @@ def normalize_features(features):
     return {k: v / total for k, v in features.items()}
 
 
-# 🔹 STEP 3 — Compute domain scores
+# STEP 3 — Compute domain scores
 def compute_domain_scores(features):
-    features = normalize_features(features)
-
-    scores = {
+    return {
         "Engineering": (
-            features["technical"] * 2.0 +
+            features["technical"] * 2 +
             features["analytical"] * 1.5
         ),
 
         "Design": (
-            features["creativity"] * 2.0
+            features["creativity"] * 2
         ),
 
         "Business": (
-            features["business"] * 2.0 +
+            features["business"] * 2 +
             features["creativity"] * 0.5
         ),
 
         "Research": (
-            features["research"] * 2.0 +
-            features["analytical"] * 1.0
+            features["research"] * 2 +
+            features["analytical"] * 1
         ),
+
+        
+        "Language": (
+            features["creativity"] * 1.5 +
+            features["analytical"] * 0.5
+        )
     }
 
-    return scores
+    
 
 
-# 🔹 STEP 4 — Rank domains
+# STEP 4 — Rank domains
 def rank_domains(scores):
     return sorted(
         scores.items(),
@@ -73,7 +77,7 @@ def rank_domains(scores):
     )
 
 
-# 🔹 STEP 5 — Full pipeline (important abstraction)
+# STEP 5 — Full pipeline (important abstraction)
 def generate_recommendation(session):
     features = aggregate_features(session)
     scores = compute_domain_scores(features)
