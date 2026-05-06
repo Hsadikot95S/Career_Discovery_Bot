@@ -1,23 +1,50 @@
-import whisper
+import os
 import tempfile
+import imageio_ffmpeg
 
-_model = None
-
-def get_model():
-    global _model
-    if _model is None:
-        _model = whisper.load_model("base")  # fast enough for dev
-    return _model
+from faster_whisper import WhisperModel
 
 
-def transcribe_bytes(audio_bytes: bytes, suffix=".webm") -> str:
-    """
-    Takes raw audio bytes (from browser), writes to temp file, runs Whisper.
-    """
-    model = get_model()
+# ==========================================
+# PORTABLE FFMPEG
+# ==========================================
 
-    with tempfile.NamedTemporaryFile(delete=True, suffix=suffix) as f:
-        f.write(audio_bytes)
-        f.flush()
-        result = model.transcribe(f.name)
-        return result.get("text", "").strip()
+ffmpeg_path = imageio_ffmpeg.get_ffmpeg_exe()
+
+os.environ["FFMPEG_BINARY"] = ffmpeg_path
+
+
+# ==========================================
+# LOAD WHISPER MODEL
+# ==========================================
+
+model = WhisperModel(
+    "base",
+    device="cpu",
+    compute_type="int8"
+)
+
+
+# ==========================================
+# TRANSCRIBE
+# ==========================================
+
+def transcribe_bytes(audio_bytes):
+
+    with tempfile.NamedTemporaryFile(
+        suffix=".wav",
+        delete=False
+    ) as temp_audio:
+
+        temp_audio.write(audio_bytes)
+
+        temp_audio_path = temp_audio.name
+
+    segments, _ = model.transcribe(temp_audio_path)
+
+    final_text = ""
+
+    for segment in segments:
+        final_text += segment.text + " "
+
+    return final_text.strip()
